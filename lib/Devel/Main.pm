@@ -63,9 +63,38 @@ __END__
 
 This module provides a clean way of specifying your script's main routine.
 
+=head1 METHODS
+
 =method main()
 
-Declares your script's main routine.
+Declares your script's main routine. Exits when done.
+
+If, instead of executing your script, you load it with C<use> or C<require>, C<main> creates a subroutine named C<run_main> in the current package. You can then call this subroutine to run your main routine. Arguments passed to this subroutine will override C<@ARGV>.
+
+Example:
+
+  require './my_script.pl';
+  
+  run_main( 'foo' );  # Calls the main routine with @ARGV = ('foo')
+
+If you alias the 'main' routine to another name, the "run" method will also be aliased. For example, if 'my_script.pl' had said:
+
+  use Devel::Main main => { -as => 'primary' };
+  
+  primary {
+    # Main code here
+  };
+
+then the installed subroutine would be called 'run_primary'.
+
+You can also control whether or not the script exits after the main routine via the import parameter 'exit'.
+
+   use Devel::Main 'main' => { 'exit' => 0 };
+   
+   main {
+     # Main routine
+   };
+   print "Still running\n";
 
 =head1 CREDITS
 
