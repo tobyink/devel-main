@@ -5,6 +5,12 @@ use warnings;
 
 use Test::More tests => 1;
 
-TESTS: {
-	use_ok('Devel::Main');
-}
+use Devel::Main 'main';
+
+main {
+	ok(1, "Called the main routine");
+};
+
+# If we got here we didn't exit
+fail(1);
+
