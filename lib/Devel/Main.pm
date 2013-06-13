@@ -15,9 +15,6 @@ package Devel::Main {
         }
     );
 
-    # Later versions will let you customize this
-    our $Main_Sub_Name = 'run_main';
-
     sub main_generator {
         my ( $class, $name, $args ) = @_;
 
