@@ -4,6 +4,8 @@ use warnings;
 
 package Devel::Main;
 
+our $VERSION = 0.003;
+
 # We use Sub::Exporter so you can import main with different names
 # with 'use Devel::Main 'main' => { -as => 'other' }
 use Sub::Exporter 0.985;
@@ -93,6 +95,16 @@ You can also control whether or not the script exits after the main routine via 
      # Main routine
    };
    print "Still running\n";
+
+Finally, you can change the name of the subroutine to call the main routine via the import parameter 'run_sub_name'.
+
+   # In 'my_script.pl'
+   use Devel::Main 'main' => { 'run_sub_name' => 'run_the_main_routine' };
+   
+   # In other (test?) script
+   require './my_script.pl';
+   
+   run_the_main_routine('bar'); # Calls the main routine with @ARGV = ('bar');
 
 =head1 CREDITS
 
