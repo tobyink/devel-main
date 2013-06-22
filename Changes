@@ -1,5 +1,7 @@
 Changes for Devel-Main:
 
+0.003: Remove extra files and specify required perl
+
 0.002: Change to less funky package syntax so that PAUSE indexer can (one hopes) read it
 
 0.001: Initial release
