@@ -1,14 +1,14 @@
 Changes for Devel-Main:
 
 0.004 2013-08-23
-    - Reformatted Changes file
+ - Reformatted Changes file
 
 0.003 2013-06-21
-    - Remove extra files and specify required perl
+ - Remove extra files and specify required perl
 
 0.002 2013-06-13
-    - Change to less funky package syntax so that PAUSE indexer can (one
-      hopes) read it
+ - Change to less funky package syntax so that PAUSE indexer can (one
+   hopes) read it
 
 0.001 2013-06-13
-    - Initial release
+ - Initial release
