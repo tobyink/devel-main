@@ -1,3 +1,4 @@
 .build
 Devel-Main-*.tar.gz
 Devel-Main-*
+.DS_Store
