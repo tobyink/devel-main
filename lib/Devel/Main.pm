@@ -6,16 +6,30 @@ package Devel::Main;
 
 our $VERSION = 0.004;
 
-# We use Sub::Exporter so you can import main with different names
-# with 'use Devel::Main 'main' => { -as => 'other' }
-use Sub::Exporter 0.985;
-Sub::Exporter::setup_exporter(
-    {
-        exports => {
-            'main' => \&main_generator
-        }
+sub import {
+    my $class  = shift;
+    @_ = 'main' unless @_;
+    
+    my $opts   = ref($_[0]) ? shift : {};
+    my $caller = $opts->{into} // scalar(caller($opts->{into_level} // 0));
+    
+    while (@_) {
+        my $name = shift;
+        my $args = ref($_[0]) ? shift : {};
+        my $gen  = $class->can("$name\_generator")
+            or do { require Carp; Carp::croak("$class does not export sub '$name'") };
+        my $code = $gen->( $class, $name, $args );
+        
+        my $as = join '', grep defined, (
+            $args->{ -prefix },
+            ($args->{ -as } // $name),
+            $args->{ -suffix },
+        );
+        
+        no strict 'refs';
+        *{"$caller\::$as"} = $code;
     }
-);
+}
 
 sub main_generator {
     my ( $class, $name, $args ) = @_;
