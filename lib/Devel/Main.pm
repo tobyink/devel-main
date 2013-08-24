@@ -4,7 +4,7 @@ use warnings;
 
 package Devel::Main;
 
-our $VERSION = 0.003;
+our $VERSION = 0.004;
 
 # We use Sub::Exporter so you can import main with different names
 # with 'use Devel::Main 'main' => { -as => 'other' }
